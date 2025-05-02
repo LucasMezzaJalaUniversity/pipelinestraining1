@@ -67,24 +67,24 @@ jobs:
 
       - name: Validate Inspection Report
         run: |
-          cd ../scripts
+          cd scripts
           ./validate_report.ps1
         shell: powershell
 
       - name: Add Coverlet Package for Code Coverage
         run: |
-          cd ../myApp.Tests
+          cd myApp.Tests
           mkdir -p reports
           dotnet add package coverlet.msbuild --package-directory .nuget
 
       - name: Run Unit Tests with Coverage
         run: |
-          cd ../myApp.Tests
+          cd myApp.Tests
           dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=reports/coverage.cobertura.xml
 
       - name: Validate Code Coverage
         run: |
-          cd ../scripts
+          cd scripts
           ./validate_coverage.ps1
         shell: powershell
 
@@ -93,7 +93,7 @@ jobs:
 
       - name: Generate Coverage Report (HTML)
         run: |
-          cd ../myApp.Tests
+          cd myApp.Tests
           "../tools/reportgenerator" -reports:reports/coverage.cobertura.xml -targetdir:reports/coveragereport -reporttypes:Html
 
       - name: Upload Coverage Report
