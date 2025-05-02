@@ -385,3 +385,9 @@ FodyWeavers.xsd
 .vscode/launch.json
 .vscode/tasks.json
 myApp.Tests/reports/**/*
+
+# Self-hosted runner
+actions-runner/
+_runner/
+.env
+.runner
