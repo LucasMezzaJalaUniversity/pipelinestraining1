@@ -118,3 +118,9 @@ jobs:
         run: |
           dotnet publish myApp/myApp.csproj
 
+      # ------------------------
+      # DEPLOY
+      
+      - name: Deploy Application
+        run: ./myApp/bin/Release/netcoreapp8/myApp
+
