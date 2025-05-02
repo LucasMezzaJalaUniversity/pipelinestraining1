@@ -59,7 +59,7 @@ jobs:
           Write-Host "Using solution: $slnPath"
           cd myApp
           mkdir reports
-          & "$jbTool" "inspectcode" "$slnPath" "-o=reports/report.xml"
+          & "$jbTool" "inspectcode" "$slnPath" "-o=reports/report.xml" -f="xml"
 
       - name: Validate Inspection Report
         run: |
