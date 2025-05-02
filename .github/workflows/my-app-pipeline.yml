@@ -22,10 +22,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: self-hosted
 
-    env:
-      DOTNET_TOOLS_PATH: ${{ github.workspace }}/tools
-      NUGET_PATH: ${{ github.workspace }}/.nuget
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -55,7 +51,7 @@ jobs:
         run: dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path tools
 
       - name: Run Code Inspection
-        shell: powershell
+        shell: pwsh
         run: |
           $jbTool = (Resolve-Path "tools/jb.exe").Path
           $slnPath = (Resolve-Path "TrainProject.sln").Path
@@ -64,22 +60,12 @@ jobs:
           cd myApp
           mkdir reports
           & "$jbTool" "inspectcode" "$slnPath" "-o=reports/report.xml"
-          if ($LASTEXITCODE -ne 0) {
-              Write-Error "InspectCode failed"
-              exit 1
-          }
-
-      - name: Print code inspection report
-        shell: powershell
-        run: |
-          Get-Content ./myApp/reports/report.xml -Raw | Out-Host
-
 
       - name: Validate Inspection Report
         run: |
           cd scripts
           ./validate_report.ps1
-        shell: powershell
+        shell: pwsh
 
       - name: Add Coverlet Package for Code Coverage
         run: |
@@ -96,7 +82,7 @@ jobs:
         run: |
           cd scripts
           ./validate_coverage.ps1
-        shell: powershell
+        shell: pwsh
 
       - name: Install ReportGenerator Tool
         run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools
