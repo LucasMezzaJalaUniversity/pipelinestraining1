@@ -65,6 +65,11 @@ jobs:
           mkdir reports
           & "$jbTool" "inspectcode" "$slnPath" "-o=reports/report.xml"
 
+      - name: Debug – list report files
+        shell: powershell
+        run: |
+          Get-ChildItem -Path ./myApp/reports -Recurse
+
       - name: Validate Inspection Report
         run: |
           cd scripts
