@@ -90,7 +90,13 @@ jobs:
       - name: Generate Coverage Report (HTML)
         run: |
           cd myApp.Tests
-          & "../tools/reportgenerator" -reports "reports/coverage.cobertura.xml" -targetdir "reports/coveragereport" -reporttypes "Html"
+          $reportTool = Resolve-Path "../tools/reportgenerator"
+          $reportFile = Resolve-Path "myApp.Tests/reports/coverage.cobertura.xml"
+          $outputDir  = Resolve-Path "myApp.Tests/reports/coveragereport"
+          & $reportTool `
+            -reports $reportFile `
+            -targetdir $outputDir `
+            -reporttypes Html
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
