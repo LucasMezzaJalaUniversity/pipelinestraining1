@@ -58,7 +58,7 @@ jobs:
         run: |
           cd myApp
           mkdir -p reports
-          "tools/jb" inspectcode ../TrainProject.sln -o=reports/report.xml
+          "tools/jb.exe" inspectcode ../TrainProject.sln -o=reports/report.xml
 
       - name: Validate Inspection Report
         run: |
