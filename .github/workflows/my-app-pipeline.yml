@@ -58,7 +58,7 @@ jobs:
         run: |
           cd myApp
           mkdir -p reports
-          & "tools/jb.exe" inspectcode ../TrainProject.sln -o=reports/report.xml
+          & "../tools/jb.exe" inspectcode ../TrainProject.sln -o=reports/report.xml
 
       - name: Validate Inspection Report
         run: |
@@ -84,12 +84,12 @@ jobs:
         shell: pwsh
 
       - name: Install ReportGenerator Tool
-        run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path $DOTNET_TOOLS_PATH
+        run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools
 
       - name: Generate Coverage Report (HTML)
         run: |
           cd ../myApp.Tests
-          "$DOTNET_TOOLS_PATH/reportgenerator" -reports:reports/coverage.cobertura.xml -targetdir:reports/coveragereport -reporttypes:Html
+          "../tools/reportgenerator" -reports:reports/coverage.cobertura.xml -targetdir:reports/coveragereport -reporttypes:Html
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
