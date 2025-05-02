@@ -55,13 +55,15 @@ jobs:
         run: dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path tools
 
       - name: Run Code Inspection
-        run: |
-          $jbTool = Resolve-Path ./tools/jb.exe
-          $solution = Resolve-Path ./TrainProject.sln
-          cd myApp
-          mkdir -p reports
-          & $jbTool inspectcode $solution -o=reports/report.xml
         shell: powershell
+        run: |
+          $jbTool = (Resolve-Path "tools/jb.exe").Path
+          $slnPath = (Resolve-Path "TrainProject.sln").Path
+          Write-Host "Using jbTool: $jbTool"
+          Write-Host "Using solution: $slnPath"
+          cd myApp
+          mkdir reports
+          & "$jbTool" "inspectcode" "$slnPath" "-o=reports/report.xml"
 
       - name: Validate Inspection Report
         run: |
