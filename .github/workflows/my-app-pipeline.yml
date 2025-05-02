@@ -88,20 +88,22 @@ jobs:
         run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools
 
       - name: Generate Coverage Report (HTML)
+        shell: powershell
         run: |
           $reportTool = Resolve-Path "./tools/reportgenerator.exe"
           $reportFile = Resolve-Path "./myApp.Tests/reports/coverage.cobertura.xml"
-          
+
           $outputDirPath = "./myApp.Tests/reports/coveragereport"
           if (-not (Test-Path $outputDirPath)) {
             New-Item -ItemType Directory -Path $outputDirPath | Out-Null
           }
           $outputDir = Resolve-Path $outputDirPath
 
-          & $reportTool `
-            -reports $reportFile `
-            -targetdir $outputDir `
-            -reporttypes Html
+          & "$reportTool" `
+            "-reports:$reportFile" `
+            "-targetdir:$outputDir" `
+            "-reporttypes:Html"
+          
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
