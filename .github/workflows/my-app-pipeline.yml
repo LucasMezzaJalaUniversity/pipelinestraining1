@@ -89,10 +89,9 @@ jobs:
 
       - name: Generate Coverage Report (HTML)
         run: |
-          cd myApp.Tests
-          $reportTool = Resolve-Path "../tools/reportgenerator"
-          $reportFile = Resolve-Path "myApp.Tests/reports/coverage.cobertura.xml"
-          $outputDir  = Resolve-Path "myApp.Tests/reports/coveragereport"
+          $reportTool = Resolve-Path "./tools/reportgenerator"
+          $reportFile = Resolve-Path "./myApp.Tests/reports/coverage.cobertura.xml"
+          $outputDir  = Resolve-Path "./myApp.Tests/reports/coveragereport"
           & $reportTool `
             -reports $reportFile `
             -targetdir $outputDir `
