@@ -51,7 +51,7 @@ jobs:
         run: dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path tools
 
       - name: Run Code Inspection
-        shell: pwsh
+        shell: powershell
         run: |
           $jbTool = (Resolve-Path "tools/jb.exe").Path
           $slnPath = (Resolve-Path "TrainProject.sln").Path
@@ -65,7 +65,7 @@ jobs:
         run: |
           cd scripts
           ./validate_report.ps1
-        shell: pwsh
+        shell: powershell
 
       - name: Add Coverlet Package for Code Coverage
         run: |
@@ -82,7 +82,7 @@ jobs:
         run: |
           cd scripts
           ./validate_coverage.ps1
-        shell: pwsh
+        shell: powershell
 
       - name: Install ReportGenerator Tool
         run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools
