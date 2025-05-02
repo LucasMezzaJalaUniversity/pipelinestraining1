@@ -64,11 +64,16 @@ jobs:
           cd myApp
           mkdir reports
           & "$jbTool" "inspectcode" "$slnPath" "-o=reports/report.xml"
+          if ($LASTEXITCODE -ne 0) {
+              Write-Error "InspectCode failed"
+              exit 1
+          }
 
-      - name: Debug – list report files
+      - name: Print code inspection report
         shell: powershell
         run: |
-          Get-ChildItem -Path ./myApp/reports -Recurse
+          Get-Content ./myApp/reports/report.xml -Raw | Out-Host
+
 
       - name: Validate Inspection Report
         run: |
