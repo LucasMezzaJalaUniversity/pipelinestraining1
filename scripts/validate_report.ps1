@@ -1,5 +1,5 @@
 # $xmlFilePath = "..\myApp\reports\report"
-$xmlFilePath = Resolve-Path "..\myApp\reports\report"
+$xmlFilePath = Resolve-Path "..\myApp\reports\report.xml"
 
 # Read the XML file content
 $xmlContent = Get-Content -Path $xmlFilePath -Raw
