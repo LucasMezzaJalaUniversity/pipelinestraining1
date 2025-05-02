@@ -54,11 +54,16 @@ jobs:
       - name: Install ReSharper InspectCode
         run: dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path tools
 
+      - name: Debug – list from inside myApp
+        run: |
+          cd myApp
+          ls ../TrainProject.sln
+
       - name: Run Code Inspection
         run: |
           cd myApp
           mkdir -p reports
-          "../tools/jb.exe" inspectcode ../TrainProject.sln -o=reports/report.xml
+          & "../tools/jb.exe" inspectcode ../TrainProject.sln -o=reports/report.xml
 
       - name: Validate Inspection Report
         run: |
