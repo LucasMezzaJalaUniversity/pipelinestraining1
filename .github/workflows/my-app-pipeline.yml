@@ -8,9 +8,6 @@ on:
   push:
     branches: ["lucasMezza_p1_dev"]
     # branches: ["lucasMezza_p1_base"]
-  pull_request:
-    branches: ["lucasMezza_p1_dev"]
-    # branches: ["lucasMezza_p1_base"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -39,7 +36,7 @@ jobs:
         run: dotnet restore
 
       - name: Build Solution
-        run: dotnet build
+        run: dotnet build --configuration Release
 
       # ------------------------
       # TESTS
@@ -116,7 +113,7 @@ jobs:
 
       - name: Publish Application
         run: |
-          dotnet publish myApp/myApp.csproj
+          dotnet publish myApp/myApp.csproj --configuration Release
 
       # ------------------------
       # DEPLOY
