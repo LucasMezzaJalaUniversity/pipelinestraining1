@@ -56,9 +56,12 @@ jobs:
 
       - name: Run Code Inspection
         run: |
+          $jbTool = Resolve-Path ./tools/jb.exe
+          $solution = Resolve-Path ./TrainProject.sln
           cd myApp
           mkdir -p reports
-          & ../tools/jb.exe inspectcode ../TrainProject.sln -o=reports/report.xml
+          & $jbTool inspectcode $solution -o=reports/report.xml
+        shell: pwsh
 
       - name: Validate Inspection Report
         run: |
