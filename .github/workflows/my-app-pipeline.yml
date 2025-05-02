@@ -89,7 +89,7 @@ jobs:
 
       - name: Generate Coverage Report (HTML)
         run: |
-          $reportTool = Resolve-Path "./tools/reportgenerator"
+          $reportTool = Resolve-Path "./tools/reportgenerator.exe"
           $reportFile = Resolve-Path "./myApp.Tests/reports/coverage.cobertura.xml"
           $outputDir  = Resolve-Path "./myApp.Tests/reports/coveragereport"
           & $reportTool `
