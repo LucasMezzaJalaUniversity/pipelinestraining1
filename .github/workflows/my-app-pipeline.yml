@@ -114,28 +114,33 @@ jobs:
         run: |
           dotnet publish myApp/myApp.csproj --configuration Release
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      # - name: Log in to Docker Hub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{ secrets.DOCKER_USERNAME }}
+      #     password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
         run: docker build -t console-app .
 
       - name: Tag image
-        run: docker tag console-app lucasmezza/myapp:1.0.0
+        run: docker tag console-app myapp:1.0.0
+        # run: docker tag console-app lucasmezza/myapp:1.0.0
 
       - name: Push Docker image 
-        run: docker push lucasmezza/myapp:1.0.0
+        run: docker push myapp:1.0.0
+        # run: docker push lucasmezza/myapp:1.0.0
 
       # ------------------------
       # DEPLOY
 
       - name: Pull and run image
         run: |
-          docker pull lucasmezza/myapp:1.0.0
-          docker run --rm lucasmezza/myapp:1.0.0
+          docker pull myapp:1.0.0
+          docker run --rm myapp:1.0.0
+        # run: |
+        #   docker pull lucasmezza/myapp:1.0.0
+        #   docker run --rm lucasmezza/myapp:1.0.0
       
       # - name: Deploy Application
       #   run: ./myApp/bin/Release/netcoreapp8/myApp
