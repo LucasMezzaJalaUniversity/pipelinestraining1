@@ -126,7 +126,7 @@ jobs:
       - name: Tag image
         run: docker tag console-app lucasmezza/myapp:1.0.0
 
-      - name: Push Docker image
+      - name: Push Docker image 
         run: docker push lucasmezza/myapp:1.0.0
 
       # ------------------------
