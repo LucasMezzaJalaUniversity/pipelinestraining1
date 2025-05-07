@@ -124,18 +124,18 @@ jobs:
         run: docker build -t console-app .
 
       - name: Tag image
-        run: docker tag console-app lucasmezza/myApp:1.0.0
+        run: docker tag console-app lucasmezza/myapp:1.0.0
 
       - name: Push Docker image
-        run: docker push lucasmezza/myApp:1.0.0
+        run: docker push lucasmezza/myapp:1.0.0
 
       # ------------------------
       # DEPLOY
 
       - name: Pull and run image
         run: |
-          docker pull lucasmezza/myApp:1.0.0
-          docker run --rm lucasmezza/myApp:1.0.0
+          docker pull lucasmezza/myapp:1.0.0
+          docker run --rm lucasmezza/myapp:1.0.0
       
       # - name: Deploy Application
       #   run: ./myApp/bin/Release/netcoreapp8/myApp
