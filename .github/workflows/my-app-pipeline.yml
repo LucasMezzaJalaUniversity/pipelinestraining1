@@ -127,17 +127,16 @@ jobs:
         run: docker tag console-app myapp:1.0.0
         # run: docker tag console-app lucasmezza/myapp:1.0.0
 
-      - name: Push Docker image 
-        run: docker push myapp:1.0.0
+      - name: Run Docker image
+        run: docker run myapp:1.0.0
+
+      # - name: Push Docker image 
         # run: docker push lucasmezza/myapp:1.0.0
 
       # ------------------------
       # DEPLOY
 
-      - name: Pull and run image
-        run: |
-          docker pull myapp:1.0.0
-          docker run --rm myapp:1.0.0
+      # - name: Pull and run image
         # run: |
         #   docker pull lucasmezza/myapp:1.0.0
         #   docker run --rm lucasmezza/myapp:1.0.0
